@@ -10,14 +10,9 @@ export function loadCoursesSuccess(courses) {
 }
 
 export function loadCourses() {
-  return function(dispatch) {
-    return courseApi
-      .getCourses()
-      .then(courses => {
-        dispatch(loadCoursesSuccess(courses));
-      })
-      .catch(error => {
-        throw error;
-      });
+  return async function(dispatch) {
+    const courses = await courseApi.getCourses();
+
+    dispatch(loadCoursesSuccess(courses));
   };
 }
